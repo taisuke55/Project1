@@ -2,7 +2,7 @@ from logic import *
 
 def main():
     application = QApplication([])
-    window = Logic()
+    window = TelevisionLogic()
     window.show()
     application.exec()
 

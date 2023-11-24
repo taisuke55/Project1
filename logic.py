@@ -42,7 +42,8 @@ class TelevisionLogic(QMainWindow, Ui_MainWindow):
                 self.__status = True
 
         def slider(self) -> None:
-            self.__volume = self.volume_slider.value()
+            if self.__status:
+                self.__volume = self.volume_slider.value()
 
         def channel1(self) -> None:
             self.__channel = 1
@@ -98,8 +99,10 @@ class TelevisionLogic(QMainWindow, Ui_MainWindow):
             if self.__status:
                 if self.__muted:
                     self.__muted = False
+                    self.volume_slider.tracking = True
                 else:
                     self.__muted = True
+                    self.volume_slider.tracking = False
 
         def volume_up(self) -> None:
             """
@@ -107,8 +110,10 @@ class TelevisionLogic(QMainWindow, Ui_MainWindow):
             """
             if self.__status:
                 self.__muted = False
+                self.volume_slider.tracking = True
                 if self.__volume < TelevisionLogic.MAX_VOLUME:
                     self.__volume += 1
+                    self.volume_slider.setValue(self.__volume)
 
         def volume_down(self) -> None:
             """
@@ -116,5 +121,7 @@ class TelevisionLogic(QMainWindow, Ui_MainWindow):
             """
             if self.__status:
                 self.__muted = False
+                self.volume_slider.tracking = True
                 if self.__volume > TelevisionLogic.MIN_VOLUME:
                     self.__volume -= 1
+                    self.volume_slider.setValue(self.__volume)
